@@ -2,9 +2,19 @@
 #include "adminmenu.h"
 #include <iostream>
 
+void AdminMenu::refreshMenu() {
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
 void AdminMenu::displayMenu(CardList& cardList) {
     int sel;
     while (true) {
+        refreshMenu();
+
         std::cout << "Admin Menu" << std::endl;
         std::cout << "1. Remote open door" << std::endl;
         std::cout << "2. List all cards in system" << std::endl;
@@ -28,6 +38,7 @@ void AdminMenu::displayMenu(CardList& cardList) {
             break;
         case 4:
             cardList.promptCardRemoval();
+            break;
         case 5:
             return;
         case 9:
@@ -36,5 +47,9 @@ void AdminMenu::displayMenu(CardList& cardList) {
         default:
             std::cout << "Invalid choice. Please select 1, 2, 3, 4, 5 or 9" << std::endl;
         }
+
+        std::cout << "\nPress Enter to return to the menu...";
+        std::cin.ignore();
+        std::cin.get();
     }
 }

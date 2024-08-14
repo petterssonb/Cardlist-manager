@@ -6,6 +6,7 @@
 
 class AdminMenu {
 public:
+    void refreshMenu();
     void displayMenu(CardList& cardList);
 };
 
