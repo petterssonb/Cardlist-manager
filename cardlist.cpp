@@ -3,6 +3,7 @@
 #include <fstream>
 #include <regex>
 #include <ctime>
+#include <limits>
 
 #define LEAP_YEAR 4
 #define CENTURY 100
