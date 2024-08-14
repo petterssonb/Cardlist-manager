@@ -1,16 +1,117 @@
 #include "cardlist.h"
 #include <iostream>
 #include <fstream>
+#include <regex>
+#include <ctime>
+
+#define LEAP_YEAR 4
+#define CENTURY 100
+#define FOUR_CENTURIES 400
+
+enum Months{
+    JANUARY = 1,
+    FEBRUARY = 2,
+    MARCH = 3,
+    APRIL = 4,
+    MAY = 5,
+    JUNE = 6,
+    JULY = 7,
+    AUGUST = 8,
+    SEPTEMBER = 9,
+    OCTOBER = 10,
+    NOVEMBER = 11,
+    DECEMBER = 12
+};
+
+void CardList::checkUniqueCardId(std::string& cardId) {
+    while(true){
+        std::cout << "Enter card ID: ";
+        std::cin >> cardId;
+        if(checkCard(cardId)){
+            std::cout << "Card ID already exists in the system." << std::endl;
+        } else{
+            break;
+        }
+    }
+}
+
+int CardList::checkCurrentYear(){
+    time_t t = time(0);
+    tm* now = localtime(&t);
+    return now->tm_year + 1900;
+}
+
+bool CardList::isLeapYear(int year){
+    return (year % LEAP_YEAR == 0 && year % CENTURY != 0) || (year % FOUR_CENTURIES == 0);
+}
+
+bool CardList::isValidDay(int day, int month, int year){
+    if(day < 1 || day > 31) return false;
+
+    if(month == FEBRUARY){
+        return day <= (isLeapYear(year) ? 29 : 28);
+    } else if(month == APRIL || month == JUNE || month == SEPTEMBER || month == NOVEMBER){
+        return day <= 30;
+    }
+    return true;
+}
+
+bool CardList::isValidMonth(int month){
+    return month >= JANUARY && month <= DECEMBER;
+}
+
+bool CardList::isValidYear(int year, int currentYear){
+    return year >= currentYear;
+}
+
+bool CardList::isValidDate(std::string& date){
+    std::regex dateRegex(R"((\d{4})-(\d{2})-(\d{2}))");
+    std::smatch match;
+
+    if(std::regex_match(date, match, dateRegex)){
+        int year = std::stoi(match[1]);
+        int month = std::stoi(match[2]);
+        int day = std::stoi(match[3]);
+
+        int currentYear = checkCurrentYear();
+
+        if(!isValidYear(year, currentYear)) return false;
+        if(!isValidMonth(month)) return false;
+        if(!isValidDay(day, month, year)) return false;
+        return true;
+    }
+    return false;
+}
+
+bool CardList::validateAccess(bool& access){
+    while(true){
+        std::cout << "Enter access (1 for access, 0 for no access): ";
+        std::cin >> access;
+
+        if(std::cin.fail() || (access != 1 && access != 0)){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Invalid input. Please enter 1 or 0." << std::endl;
+        }else {
+            return true;
+        }
+    }
+}
 
 void CardList::promptCardRegistration(){
     std::string cardId, regDate;
     bool access;
-    std::cout << "Enter card ID: ";
-    std::cin >> cardId;
-    std::cout << "Enter registration date (YYYY-MM-DD): ";
-    std::cin >> regDate;
-    std::cout << "Enter access (1 for access, 0 for no access): ";
-    std::cin >> access;
+    checkUniqueCardId(cardId);
+    while(true){
+        std::cout << "Enter registration date (YYYY-MM-DD): ";
+        std::cin >> regDate;
+        if(isValidDate(regDate)){
+            break;
+        } else{
+            std::cout << "Invalid date format. Please enter a valid date." << std::endl;
+        }
+    }
+    validateAccess(access);
     addCard(Card(cardId, access, regDate));
 }
 
@@ -60,9 +161,17 @@ bool CardList::checkCard(const std::string& cardId) const {
 }
 
 void CardList::listAllCards() const {
+    const std::string greenText = "\033[32m";
+    const std::string redText = "\033[31m";
+    const std::string resetText = "\033[0m";
+
     for (const auto& card : cards) {
+        std::string accessStatus = card.hasAccess() ? "Access" : "No Access";
+        std::string color = card.hasAccess() ? greenText : redText;
+
+
         std::cout << card.getCardId() << " "
-                  << (card.hasAccess() ? "Access" : "No Access") << " "
+                  << color << accessStatus << resetText << " "
                   << card.getRegDate() << std::endl;
     }
 }
