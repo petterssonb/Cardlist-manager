@@ -1,4 +1,11 @@
-PROG = main.exe 
+ifeq ($(OS), Windows_NT)
+    PROG = main.exe
+    RM = del
+else
+    PROG = main
+    RM = rm -f
+endif
+
 SRC = main.cpp card.cpp cardlist.cpp adminmenu.cpp
 CXXFLAGS = -std=c++11 -g -Wall -Wextra -Wundef -pedantic
 LIBS = 
@@ -11,6 +18,6 @@ $(PROG): $(SRC)
 	$(CXX) -o $@ $(CXXFLAGS) $(SRC) $(LIBS)
 
 clean:
-	rm -f $(PROG)
+	$(RM) $(PROG)
 
 .PHONY: all clean
