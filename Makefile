@@ -6,8 +6,10 @@ else
     RM = rm -f
 endif
 
-SRC = main.cpp card.cpp cardlist.cpp adminmenu.cpp
-CXXFLAGS = -std=c++11 -g -Wall -Wextra -Wundef -pedantic
+SRC_DIR = src
+INC_DIR = include
+SRC = $(SRC_DIR)/main.cpp $(SRC_DIR)/card.cpp $(SRC_DIR)/cardlist.cpp $(SRC_DIR)/adminmenu.cpp
+CXXFLAGS = -std=c++11 -g -Wall -Wextra -Wundef -pedantic -I$(INC_DIR)
 LIBS = 
 
 CXX = g++
