@@ -19,14 +19,19 @@ The CardList Manager is a simple command-line application designed to manage a l
 ## Project Structure
 
 ```bash
-├── main.cpp           # Entry point for the application
-├── card.h             # Header file defining the Card class
-├── card.cpp           # Implementation of the Card class
-├── cardlist.h         # Header file defining the CardList class
-├── cardlist.cpp       # Implementation of the CardList class
-├── adminmenu.h        # Header file defining the AdminMenu class
-├── adminmenu.cpp      # Implementation of the AdminMenu class
-└── cardlist_data.txt  # (Example) File for storing card data
+├── include/
+│   ├── adminmenu.h        # Header file defining the AdminMenu class
+│   ├── card.h             # Header file defining the Card class
+│   └── cardlist.h         # Header file defining the CardList class
+├── src/
+│   ├── adminmenu.cpp      # Implementation of the AdminMenu class
+│   ├── card.cpp           # Implementation of the Card class
+│   ├── cardlist.cpp       # Implementation of the CardList class
+│   └── main.cpp           # Entry point for the application
+├── cardlist_data.txt      # (Example) File for storing card data
+├── Makefile               # Build script for the project
+├── LICENSE                # License file
+└── README.md              # Readme file with project information
 
 ```
 
