@@ -1,5 +1,3 @@
-would this .gitignore make my projects better looking by removing like output files and vscode things popping inside the repo?:
-
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
@@ -29,3 +27,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+main.exe.dSYM/Contents
+main.exe
+main
