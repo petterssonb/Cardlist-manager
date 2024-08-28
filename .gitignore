@@ -29,5 +29,6 @@ bin/
 .DS_Store
 
 main.exe.dSYM/Contents
+main.dSYM/Contents
 main.exe
 main
