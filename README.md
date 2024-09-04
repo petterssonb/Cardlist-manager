@@ -29,61 +29,73 @@ The CardList Manager is a simple command-line application designed to manage a l
 │   ├── cardlist.cpp       # Implementation of the CardList class
 │   └── main.cpp           # Entry point for the application
 ├── cardlist_data.txt      # (Example) File for storing card data
-├── Makefile               # Build script for the project
+├── CMakeLists.txt         # CMake configuration file for building the project
 ├── LICENSE                # License file
+├── build.sh               # Shell script to build the project (macOS/Linux/Windows with bash)
+├── run.sh                 # Shell script to run the project (macOS/Linux/Windows with bash)
+├── build.bat              # Batch script to build the project (Windows)
+├── run.bat                # Batch script to run the project (Windows)
 └── README.md              # Readme file with project information
 
 ```
 
 ## How to run
 
-1. Clone the repository to your local machine
+### Prerequisites
+
+Make sure you have the following installed on your system:
+
+ - ***CMake*** (version 3.10 or higher)
+     - [CMake Download and Installation Guide](https://perso.uclouvain.be/allan.barrea/opencv/building_tools.html)
+
+ - ***G++ Compiler*** (for compiling C++ code)
+     - Run: ***g++ --version*** in the terminal to verify G++ is installed. If not, refer to one of the setup guides below.
+     
+     - [G++ for Windows](https://www.youtube.com/watch?v=GxFiUEO_3zM)
+
+     - [G++ for MacOS](https://www.youtube.com/watch?v=HYrXBoDJmcw)
+
+     - [G++ for Linux](https://www.youtube.com/watch?v=4e7pa6Pf3VQ)
+
+
+### 1. Clone the repository to your local machine
 
 ```bash
 git clone https://github.com/petterssonb/Cardlist-manager.git
 ```
 
-2. Navigate to the project directory.
+### 2. Navigate to the project directory.
 
 ```bash
 cd Cardlist-manager
 ```
-3. Make sure:
- - You have g++ compiler (run the following in the terminal)
+
+### 3. Build the Project:
+
+***macOS/Linux (using build.sh)***
 ```bash
-g++ --version
-```
-**If you do not have the compiler, you should see something like this:**
-
- 'g++' is not recognized as an internal or external command,
-operable program or batch file.
-
-**Then watch one of these below**
-
-[G++ for Windows](https://www.youtube.com/watch?v=GxFiUEO_3zM)
-
-[G++ for MacOS](https://www.youtube.com/watch?v=HYrXBoDJmcw)
-
-[G++ for Linux](https://www.youtube.com/watch?v=4e7pa6Pf3VQ)
- 
-
-
-### 4. Build the Project:
-
-```bash
-make
+./build.sh
 ```
 
-### 5. Run the Project
-
-#### MacOS or Linux
+***Windows (using build.bat)***
 ```bash
-./main
+./build.bat
 ```
 
-#### Windows
+This will generate the ***main*** executable on macOS/Linux or ***main.exe*** on Windows in the build directory
+
+### 4. Run the Project
+
+After successfully building the project, use the provided scripts to run the program:
+
+***macOS/Linux***
 ```bash
-./main.exe
+./run.sh
+```
+
+***Windows***
+```bash
+./run.bat
 ```
 
 ## License

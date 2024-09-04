@@ -1,4 +1,3 @@
-// AdminMenu.cpp
 #include "adminmenu.h"
 #include <iostream>
 
