@@ -4,7 +4,7 @@
 
 The CardList Manager is a simple command-line application designed to manage a list of cards with access permissions. The program allows administrators to add, remove, and check cards, as well as list all cards in the system. Additionally, the application supports saving and loading card data to and from a file.
 
-**Compatibility Note:** The Makefile committed in this repository will run on Windows, Linux and MacOS. Be sure to follow the steps below in the "**How to run**" section to properly run the program.
+**Compatibility Note:** The project will run on Windows, Linux and MacOS by using Cmake. Be sure to follow the steps below in the "**How to run**" section to properly run the program.
 
 ## Features
 
